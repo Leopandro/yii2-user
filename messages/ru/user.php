@@ -82,6 +82,7 @@ return [
     'Error occurred while deleting user' => 'Произошла ошибка при удалении пользователя',
     'Finish' => 'Завершить',
     'Forgot password?' => 'Забыли пароль?',
+    'Full name' => 'ФИО',
     'Gravatar email' => 'Gravatar email',
     'Hello' => 'Здравствуйте',
     'If you already registered, sign in and connect this account on settings page' => 'Если вы уже зарегисрированы, войдите и подключите аккаунт в настройках',

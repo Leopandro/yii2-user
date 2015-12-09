@@ -33,6 +33,7 @@ use yii\web\IdentityInterface;
  * Database fields:
  * @property integer $id
  * @property string  $username
+ * @property string  $full_name
  * @property string  $email
  * @property string  $unconfirmed_email
  * @property string  $password_hash
@@ -161,13 +162,14 @@ class User extends ActiveRecord implements IdentityInterface
     {
         return [
             'username'          => Yii::t('user', 'Username'),
+            'full_name'         => Yii::t('user', 'Full name'),
             'email'             => Yii::t('user', 'Email'),
+            'corporate_email'   => Yii::t('user', 'Corporate email'),
             'registration_ip'   => Yii::t('user', 'Registration ip'),
             'unconfirmed_email' => Yii::t('user', 'New email'),
             'password'          => Yii::t('user', 'Password'),
             'created_at'        => Yii::t('user', 'Registration time'),
             'confirmed_at'      => Yii::t('user', 'Confirmation time'),
-            'corporate_email'   => Yii::t('user', 'Corporate email'),
         ];
     }
 
@@ -183,11 +185,11 @@ class User extends ActiveRecord implements IdentityInterface
     public function scenarios()
     {
         return [
-            'register' => ['username', 'email', 'password', 'corporate_email'],
+            'register' => ['username', 'full_name', 'email', 'password', 'corporate_email'],
             'connect'  => ['username', 'email'],
-            'create'   => ['username', 'email', 'password', 'corporate_email'],
-            'update'   => ['username', 'email', 'password', 'corporate_email'],
-            'settings' => ['username', 'email', 'password', 'corporate_email'],
+            'create'   => ['username', 'full_name', 'email', 'password', 'corporate_email'],
+            'update'   => ['username', 'full_name', 'email', 'password', 'corporate_email'],
+            'settings' => ['username', 'full_name', 'email', 'password', 'corporate_email'],
         ];
     }
 
@@ -218,6 +220,12 @@ class User extends ActiveRecord implements IdentityInterface
             'corporate_emailPattern'  => ['corporate_email', 'email'],
             'corporate_emailLength'   => ['corporate_email', 'string', 'max' => 255],
             'corporate_emailTrim'     => ['corporate_email', 'trim'],
+
+            // full name rules
+            'full_nameRequired' => ['full_name', 'required', 'on' => ['register', 'create', 'connect', 'update']],
+            'full_nameLength'   => ['full_name', 'string', 'max' => 255],
+            'full_nameTrim'     => ['full_name', 'trim'],
+
         ];
     }
 
